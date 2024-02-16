@@ -12,7 +12,6 @@ def softmax(X: np.array) -> np.array:
 
 linear = lambda X: X
 
-
 def activation_by_name(name: str) -> Callable[[np.array], np.array]:
     """Return activation function from name."""
 
