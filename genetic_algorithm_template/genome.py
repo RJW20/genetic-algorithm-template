@@ -5,7 +5,6 @@ import os
 import numpy as np
 
 from .layer import Layer
-
 from .activation_functions import sigmoid, relu, softmax, linear, activation_by_name
 
 class Genome:
