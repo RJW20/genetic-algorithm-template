@@ -32,6 +32,7 @@ class Layer:
         layer = cls(size, activation)
         layer.weights = np.subtract(np.multiply(np.random.rand(size, prev_size), 2), 1)
         layer.bias = np.subtract(np.multiply(np.random.rand(size), 2), 1)
+        
         return layer
 
     def propagate(self, prev_neurons: np.array) -> None:
