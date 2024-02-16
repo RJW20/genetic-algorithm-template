@@ -94,7 +94,7 @@ class Genome:
 
         #add the layers into the genome
         for coord, layer_properties in np.ndenumerate(structure[1:]):
-            layer = Layer(layer_properties[0], layer_properties[1].decode('utf-8'))
+            layer = Layer(layer_properties[0], activation_by_name(layer_properties[1].decode('utf-8')))
             layer.weights = genome_dict[f'{coord[0]}_weights']
             layer.bias = genome_dict[f'{coord[0]}_bias']
             genome.layers.append(layer)
