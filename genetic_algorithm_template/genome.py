@@ -82,7 +82,8 @@ class Genome:
         """Load a neural network from a .npz file.
         
         The file must already exist.
-        The structure is gleaned from the file."""
+        The structure is gleaned from the file.
+        """
 
         genome = cls()
         
