@@ -41,8 +41,10 @@ class BasePlayer(ABC):
         """Advance to the state achieved by carrying out move."""
         pass
 
+    @property
     @abstractmethod
     def is_dead(self) -> bool:
+        """Return True if the player has reached a state where the game is over."""
         pass
 
     def __eq__(self, other: BasePlayer) -> bool:
@@ -52,9 +54,9 @@ class BasePlayer(ABC):
     def __pickle__(self):
         pass
 
-    @classmethod
     @abstractmethod
-    def empty_clone(cls) -> BasePlayer:
+    def empty_clone(self) -> BasePlayer:
+        """Return a new instance of self's class without a genome."""
         pass
 
 
