@@ -49,7 +49,10 @@ class BasePlayer(ABC):
     def __pickle__(self):
         pass
 
-
+    @classmethod
+    @abstractmethod
+    def empty_clone(cls) -> BasePlayer:
+        pass
 
 
 
