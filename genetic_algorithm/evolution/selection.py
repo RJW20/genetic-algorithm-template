@@ -1,7 +1,7 @@
 from functools import cached_property
 import numpy as np
 
-from .base_player import BasePlayer
+from ..base_player import BasePlayer
 
 
 class FitnessWeightedSelector:

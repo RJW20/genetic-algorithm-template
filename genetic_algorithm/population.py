@@ -1,5 +1,5 @@
 from .base_player import BasePlayer
-from .selection import FitnessWeightedSelector
+from evolution.selection import FitnessWeightedSelector
 
 
 class Population:

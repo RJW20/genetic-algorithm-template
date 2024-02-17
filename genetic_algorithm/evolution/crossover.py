@@ -1,6 +1,6 @@
 import numpy as np
 
-from .genome import Genome
+from ..genome import Genome
 
 
 def one_point_crossover(parent1: Genome, parent2: Genome, gen: int) -> tuple[Genome, Genome]:

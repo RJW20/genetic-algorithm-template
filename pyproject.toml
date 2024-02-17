@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "genetic_algorithm_template"
+name = "genetic_algorithm"
 version = "0.1.0"
 description = "Template of implementation of the genetic algorithm on neural networks"
 authors = ["RJW20"]
