@@ -54,7 +54,7 @@ class Genome:
 
         return deepcopy(self)
 
-    def save(self, file_name: str, folder_name: str) -> None:
+    def save(self, file_name: str, folder_name: str, id: int) -> None:
         """Save neural network parameters to .npz."""
 
         #check folder exists, create if it doesn't
@@ -62,18 +62,19 @@ class Genome:
             os.makedirs(folder_name)
 
         #create a dictionary of the genome and its layers
-        savez_dict = dict()
-        savez_dict['birth_gen'] - self.birth_gen
-        savez_dict['structure'] = np.array([(24, b'none')] + [(layer.size, str(layer.activation)) for layer in self.layers], dtype='int,S8')
+        genome_dict = dict()
+        genome_dict['id'] = id
+        genome_dict['birth_gen'] - self.birth_gen
+        genome_dict['structure'] = np.array([(24, b'none')] + [(layer.size, str(layer.activation)) for layer in self.layers], dtype='int,S8')
         for i, layer in enumerate(self.layers):
-            savez_dict[f'{i}_weights'] = layer.weights
-            savez_dict[f'{i}_bias'] = layer.bias
+            genome_dict[f'{i}_weights'] = layer.weights
+            genome_dict[f'{i}_bias'] = layer.bias
 
         #save the file
-        np.savez(f'{folder_name}/{file_name}', **savez_dict)
+        np.savez(f'{folder_name}/{file_name}', **genome_dict)
 
     @classmethod
-    def load(cls, file_name: str, folder_name: str) -> Genome:
+    def load(cls, file_name: str, folder_name: str) -> tuple[Genome, int]:
         """Load a neural network from a .npz file.
         
         The file must already exist.
@@ -84,6 +85,7 @@ class Genome:
         
         #load the dictionary of files and the structure
         genome_dict = np.load(f'{folder_name}/{file_name}')
+        id = genome_dict['id']
         genome.birth_gen = genome_dict['birth_gen']
         structure = genome_dict['structure']
 
@@ -94,4 +96,4 @@ class Genome:
             layer.bias = genome_dict[f'{coord[0]}_bias']
             genome.layers.append(layer)
 
-        return genome
+        return genome, id
