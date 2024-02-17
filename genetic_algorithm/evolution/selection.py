@@ -4,27 +4,19 @@ import numpy as np
 from ..base_player import BasePlayer
 
 
-class FitnessWeightedSelector:
-    """Iterator that picks parents at rate proportional to their fitness."""
-    
-    def __init__(self, players: list[BasePlayer]) -> None:
-        self.players = players
-        self.last = None
+def fitness_weighted_selection(parents: list[BasePlayer]) -> list[BasePlayer, BasePlayer]:
+    """Picks 2 parents at rate proportional to their fitness."""
 
-    @cached_property
-    def wheel(self) -> float:
-        return sum(player.fitness for player in self.players)
-
-    def __iter__(self):
-        return self
-    
-    def __next__(self):
-        
-        #add something that stops the choice being the same as self.last, but only bothers to do the check if self.last is not none
-
-        pick = np.random.uniform(0, self.wheel)
+    selection = []
+    while len(selection) < 2:
+        wheel = sum(parent.fitness for parent in parents)
+        pick = np.random.uniform(0, wheel)
         running_sum = 0
-        for player in self.players:
-            running_sum += player.fitness
+        for parent in parents:
+            running_sum += parent.fitness
             if running_sum > pick:
-                return player
+                selection.append(parent)
+                parents.remove(parent)
+                break
+    
+    return selection
