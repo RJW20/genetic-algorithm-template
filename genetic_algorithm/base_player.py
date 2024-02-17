@@ -43,7 +43,7 @@ class BasePlayer(ABC):
         pass
 
     def __eq__(self, other: BasePlayer) -> bool:
-        return self == other
+        return self.genome == other.genome
     
     @abstractmethod
     def __pickle__(self):
