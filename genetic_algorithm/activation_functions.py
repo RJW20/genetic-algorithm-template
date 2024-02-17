@@ -17,6 +17,6 @@ def activation_by_name(name: str) -> Callable[[np.array], np.array]:
 
     activations = [('sigmoid', sigmoid), ('relu', relu), ('softmax', softmax), ('linear', linear)]
     func = [activation[1] for activation in activations if activation[0].lower() == name.lower()]
-    assert len(func) == 1, f"invalid activation function {name}"
+    assert len(func) == 1, f"Invalid activation function {name}"
 
     return func[0]
