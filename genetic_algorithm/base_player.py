@@ -28,14 +28,17 @@ class BasePlayer(ABC):
 
     @abstractmethod
     def look(self) -> None:
+        """Update the attributes used as input to the Genome."""
         pass
 
     @abstractmethod
-    def think(self) -> None:
+    def think(self) -> Any:
+        """Feed the input into the Genome and turn the output into a valid move."""
         pass
 
     @abstractmethod
     def move(self, move: Any) -> None:
+        """Advance to the state achieved by carrying out move."""
         pass
 
     @abstractmethod
