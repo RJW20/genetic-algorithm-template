@@ -49,9 +49,9 @@ class Genome:
     def __eq__(self, other):
         """Return True if both Genomes have the same structure and parameters."""
 
-        if (depth := len(self.layers)) != len(other.layers): return False
-        for i in range(depth):
-            if self.layers[i] != other.layers[i]: return False
+        if len(self.layers) != len(other.layers): return False
+        for i, (l1, l2) in enumerate(zip(self.layers, other.layers)):
+            if l1 != l2: return False
         return True
 
     def clone(self) -> Genome:
