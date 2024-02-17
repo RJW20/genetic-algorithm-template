@@ -1,3 +1,5 @@
+from typing import Callable
+
 import numpy as np
 
 from ..genome import Genome
@@ -29,3 +31,13 @@ def uniform_mutation(genome: Genome, mutation_rate: float) -> None:
                 mutation = np.random.uniform(-1, 1, size=arr.shape)
                 mask = np.random.random(size=arr.shape) < mutation_rate
                 arr[mask] += mutation[mask]
+
+
+def mutation_by_name(name: str) -> Callable[[Genome, float], None]:
+    """Return mutation function from name."""
+
+    mutations = [('gaussian', gaussian_mutation), ('uniform', uniform_mutation)]
+    func = [mutation[1] for mutation in mutations if mutation[0].lower() == name.lower()]
+    assert len(func) == 1, f"invalid mutation function {name}"
+
+    return func[0]

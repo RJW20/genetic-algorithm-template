@@ -1,3 +1,5 @@
+from typing import Callable
+
 import numpy as np
 
 from ..genome import Genome
@@ -50,3 +52,11 @@ def uniform_crossover(parent1: Genome, parent2: Genome, gen: int) -> tuple[Genom
     return offspring1, offspring2
     
 
+def crossover_by_name(name: str) -> Callable[[Genome, Genome, int], tuple[Genome, Genome]]:
+    """Return crossover function from name."""
+
+    crossovers = [('one-point', one_point_crossover), ('uniform', uniform_crossover)]
+    func = [crossover[1] for crossover in crossovers if crossover[0].lower() == name.lower()]
+    assert len(func) == 1, f"invalid crossover function {name}"
+
+    return func[0]
