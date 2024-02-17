@@ -1,6 +1,6 @@
 import numpy as np
 
-from .genome import Genome
+from ..genome import Genome
 
 
 def gaussian_mutation(genome: Genome, mutation_rate: float) -> None:
