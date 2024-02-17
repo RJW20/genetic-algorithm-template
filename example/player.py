@@ -9,7 +9,7 @@ class Player(BasePlayer):
     All these methods must be present.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, **kwargs) -> None:
         pass
 
     def look(self) -> None:
