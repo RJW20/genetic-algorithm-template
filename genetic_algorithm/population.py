@@ -1,8 +1,10 @@
 import os
+import re
 
 import numpy as np
 
 from .base_player import BasePlayer
+from .genome import Genome
 from evolution.selection import fitness_weighted_selection
 from evolution.crossover import one_point_crossover, uniform_crossover, crossover_by_name
 from evolution.mutation import gaussian_mutation, uniform_mutation, mutation_by_name
@@ -61,8 +63,17 @@ class Population:
             
         if len(self.players) == self.size + 1: self.players.pop()   #adding 2 at a time can cause us to add one too many
 
+    def new_brains(self, structure: tuple[tuple[int,str]]) -> None:
+        """Fill the population with newly randomized Genomes of given structure.
+        
+        Structure must be a tuple of tuples (size, activation).
+        """
+
+        for player in self.players:
+            player.genome = Genome.new(structure)
+
     def save(self, folder_name: str) -> None:
-        """Save population stats and players' genomes.
+        """Save population stats and players' Genomes.
         
         Designed to be done after a cull so that a new population can be repopulated from the save and continue evolution.
         """
@@ -75,13 +86,50 @@ class Population:
         for file in os.listdir(folder_name):
             os.remove(f'{folder_name}/{file}')
 
-        #save a dictionary of stats
-        savez_dict = dict()
-        savez_dict['size'] = self.size
-        savez_dict['current_generation'] = self.current_generation
-        savez_dict['fitness'] = [player.fitness for player in self.players]
-        np.savez(f'{folder_name}/stats', **savez_dict)
+        #create a dictionary of stats
+        stats = dict()
+        stats['current_generation'] = self.current_generation
 
-        #save the genomes
-        for i, player in enumerate(self.players):
-            player.genome.save(i, folder_name)
+        #save the Genomes and record their fitness for repopulation
+        fitness = []
+        for id, player in enumerate(self.players):
+            player.genome.save(id, folder_name, id)
+            fitness.append((id, player.fitness))
+
+        stats['fitness'] = fitness
+        np.savez(f'{folder_name}/stats', **stats)
+
+    def load(self, folder_name: str) -> None:
+        """Load Genomes saved in the given folder into the population's players.
+        
+        If there are more Genomes than players then the excess Genomes will be ignored.
+        If there are more players than Genomes then the additional players will be removed if they have no Genome.
+        """
+
+        #check folder exists
+        if not os.path.exists(folder_name):
+            raise Exception("Prescribed parent folder doesn't exist")
+        
+        #load the stats
+        stats = np.load(f'{folder_name}/stats')
+        self.current_generation = stats['current_generation']
+
+        #load the Genomes and assign their fitness
+        fitness = stats['fitness']
+        for file_name in os.listdir(folder_name):
+
+            if file_name == 'stats.npz': continue #already opened
+
+            #load the Genome and its corresponding fitness
+            genome, id = Genome.load(file_name, folder_name)
+            if id > len(fitness): continue
+            _fitness = [f[1] for f in fitness if f[0] == id]
+            assert len(_fitness) == 1, f"Invalid population save, cannot mix 2 or more saves."
+            genome.fitness = _fitness[0]
+
+            #add the Genome to a player
+            self.players[id].genome = genome
+
+        #remove any Genome-less players
+        for player in self.players:
+            if not player.genome: self.players.remove(player)
