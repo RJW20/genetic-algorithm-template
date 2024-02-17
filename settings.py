@@ -21,3 +21,5 @@ genetic_algorithm_settings = {
     'mutation_rate': 0.05,          #probability a gene will mutate
 
 }
+
+runner_settings = {}
