@@ -38,6 +38,6 @@ def mutation_by_name(name: str) -> Callable[[Genome, float], None]:
 
     mutations = [('gaussian', gaussian_mutation), ('uniform', uniform_mutation)]
     func = [mutation[1] for mutation in mutations if mutation[0].lower() == name.lower()]
-    assert len(func) == 1, f"invalid mutation function {name}"
+    assert len(func) == 1, f"Invalid mutation function {name}"
 
     return func[0]

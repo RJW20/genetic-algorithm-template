@@ -57,6 +57,6 @@ def crossover_by_name(name: str) -> Callable[[Genome, Genome, int], tuple[Genome
 
     crossovers = [('one-point', one_point_crossover), ('uniform', uniform_crossover)]
     func = [crossover[1] for crossover in crossovers if crossover[0].lower() == name.lower()]
-    assert len(func) == 1, f"invalid crossover function {name}"
+    assert len(func) == 1, f"Invalid crossover function {name}"
 
     return func[0]
