@@ -51,7 +51,16 @@ class BasePlayer(ABC):
         return self.genome == other.genome
     
     @abstractmethod
-    def __pickle__(self):
+    def __getstate__(self) -> dict:
+        """Return a dictionary containing attribute names and their values as (key, value) pairs.
+        
+        All values must also be pickleable i.e. not use slots or have __getstate__ and __setstate__ methods like this.
+        """
+        pass
+
+    @abstractmethod
+    def __setstate__(self, d: dict) -> BasePlayer:
+        """Load the attributes in the dictionary d into self."""
         pass
 
     @abstractmethod

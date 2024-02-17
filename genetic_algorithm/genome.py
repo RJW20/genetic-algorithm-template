@@ -10,11 +10,6 @@ from .activation_functions import sigmoid, relu, softmax, linear, activation_by_
 class Genome:
     """Neural network of given structure."""
 
-    __slots__ = (
-        "birth_gen",
-        "layers",
-    )
-
     def __init__(self, birth_gen: int = 1) -> None:
         self.birth_gen = birth_gen
         self.layers = tuple()
