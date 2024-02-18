@@ -11,7 +11,7 @@ def calculate_fitness(**stats: dict) -> float:
     return .0
 
 
-def run(player: Player) -> Player:
+def simulate(player: Player) -> Player:
     """Assign the player its fitness.
     
     Run the player in its environment dependent on runner settings.

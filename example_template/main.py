@@ -4,7 +4,7 @@ from genetic_algorithm import Population
 from player import Player
 from settings import player_args
 from settings import genetic_algorithm_settings
-from runner import run
+from simulator import simulate
 
 
 def main() -> None:
@@ -36,7 +36,7 @@ def main() -> None:
 
         #run the players with multiprocessing
         with Pool() as pool:
-            population.players = pool.imap_unordered(run, population.players, chunksize=1)
+            population.players = pool.imap_unordered(simulate, population.players, chunksize=1)
 
         #print some stats
         print(f'\ngeneration: {population.current_generation}, best fitness: {round(population.champ.fitness)}, average fitness: {round(population.average_fitness)}, ', end = '')
