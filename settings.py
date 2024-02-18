@@ -22,4 +22,4 @@ genetic_algorithm_settings = {
 
 }
 
-runner_settings = {}
+simulation_settings = {}
