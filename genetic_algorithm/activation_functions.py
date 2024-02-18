@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Literal
 
 import numpy as np
 
@@ -12,7 +12,7 @@ def softmax(X: np.ndarray) -> np.ndarray:
 
 linear = lambda X: X
 
-def activation_by_name(name: str) -> Callable[[np.ndarray], np.ndarray]:
+def activation_by_name(name: Literal['sigmoid', 'relu', 'softmax', 'linear']) -> Callable[[np.ndarray], np.ndarray]:
     """Return activation function from name."""
 
     activations = {
@@ -23,8 +23,8 @@ def activation_by_name(name: str) -> Callable[[np.ndarray], np.ndarray]:
     }
 
     try:
-        activation = activations[name.lower()]
+        activation = activations[name]
     except KeyError:
-        raise Exception(f"Invalid activation function {name}")
+        raise TypeError
 
     return activation

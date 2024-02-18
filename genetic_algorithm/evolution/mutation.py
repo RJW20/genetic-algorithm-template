@@ -1,4 +1,4 @@
-from typing import Callable
+from typing import Callable, Literal
 
 import numpy as np
 
@@ -33,7 +33,7 @@ def uniform_mutation(genome: Genome, mutation_rate: float) -> None:
                 arr[mask] += mutation[mask]
 
 
-def mutation_by_name(name: str) -> Callable[[Genome, float], None]:
+def mutation_by_name(name: Literal['gaussian', 'uniform']) -> Callable[[Genome, float], None]:
     """Return mutation function from name."""
 
     mutations = {
@@ -42,8 +42,8 @@ def mutation_by_name(name: str) -> Callable[[Genome, float], None]:
     }
     
     try:
-        mutation = mutations[name.lower()]
+        mutation = mutations[name]
     except KeyError:
-         raise Exception(f"Invalid mutation function {name}")
+         raise TypeError
 
     return mutation
