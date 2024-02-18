@@ -29,8 +29,7 @@ class Population:
         """Remove all but top percentage of players with highest fitness."""
 
         self.players.sort(key = lambda player: player.fitness, reverse=True)
-        if (num_left := int(self.size * percentage)) <= 1:
-            raise Exception('Parent percentage is too low or the population is not large enough; there must be at least 2 parents.')
+        num_left = max(int(self.size * percentage), 2)  #need at least 2 left to be able to repopulate 
         self.players = self.players[:num_left]
 
     def repopulate(self, crossover_type: str, mutation_type: str, mutation_rate: float) -> None:
