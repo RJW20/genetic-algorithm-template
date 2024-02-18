@@ -61,7 +61,7 @@ def crossover_by_name(name: Literal['one-point', 'uniform']) -> Callable[[Genome
     }
 
     try:
-        crossover = crossovers[name.lower()]
+        crossover = crossovers[name]
     except KeyError:
         raise TypeError
 
