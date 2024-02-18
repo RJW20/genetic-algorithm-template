@@ -1,5 +1,5 @@
 from player import Player
-from settings import runner_settings
+from settings import simulation_settings
 
 
 def calculate_fitness(**stats: dict) -> float:
