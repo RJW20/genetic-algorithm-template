@@ -18,9 +18,12 @@ class Layer:
     )
 
     def __init__(self, size: int, activation: Callable[[np.ndarray], np.ndarray]) -> None:
-        self.size = size
         self.activation = activation
         self.neurons = np.zeros(size)
+
+    @property
+    def size(self):
+        return len(self.neurons)
 
     @classmethod
     def new(cls, size: int, prev_size: int, activation: Callable[[np.ndarray], np.ndarray]) -> Layer:
