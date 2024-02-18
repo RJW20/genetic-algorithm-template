@@ -90,19 +90,16 @@ class Population:
         stats['current_generation'] = self.current_generation
 
         #save the Genomes and record their fitness for repopulation
-        fitness = []
         for id, player in enumerate(self.players):
-            player.genome.save(id, folder_name, id)
-            fitness.append((id, player.fitness))
+            player.genome.save(id, folder_name, player.fitness)
 
-        stats['fitness'] = fitness
         np.savez(f'{folder_name}/stats', **stats)
 
     def load(self, folder_name: str) -> None:
         """Load Genomes saved in the given folder into the population's players.
         
         If there are more Genomes than players then the excess Genomes will be ignored.
-        If there are more players than Genomes then the additional players will be removed if they have no Genome.
+        If there are more players than Genomes then the additional players will be removed.
         """
 
         #check folder exists
@@ -114,21 +111,20 @@ class Population:
         self.current_generation = stats['current_generation']
 
         #load the Genomes and assign their fitness
-        fitness = stats['fitness']
+        id = 0
         for file_name in os.listdir(folder_name):
 
-            if file_name == 'stats.npz': continue #already opened
+            if file_name == 'stats.npz': continue   #already opened
+
+            if id > self.size: break    #run out of players to load genomes into
 
             #load the Genome and its corresponding fitness
-            genome, id = Genome.load(file_name, folder_name)
-            if id > len(fitness): continue
-            _fitness = [f[1] for f in fitness if f[0] == id]
-            assert len(_fitness) == 1, f"Invalid population save, cannot mix 2 or more saves."
-            genome.fitness = _fitness[0]
+            genome, fitness = Genome.load(file_name, folder_name)
+            genome.fitness = fitness
 
-            #add the Genome to a player
+            #add the Genome to a (unique) player
             self.players[id].genome = genome
+            id += 1
 
-        #remove any Genome-less players
-        for player in self.players:
-            if not player.genome: self.players.remove(player)
+        #remove the rest of the players
+        self.players = self.players[:id]
