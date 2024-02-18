@@ -21,8 +21,8 @@ def simulate(player: Player) -> Player:
 
     while not player.is_dead:
         player.look()
-        player.think()
-        player.move()
+        move = player.think()
+        player.move(move)
 
         #edit stats after each move
 
