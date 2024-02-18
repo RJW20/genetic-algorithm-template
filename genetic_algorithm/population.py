@@ -1,5 +1,5 @@
 import os
-from collections import Sequence
+from collections.abc import Sequence
 
 import numpy as np
 
