@@ -45,7 +45,7 @@ class Population:
         parents = self.players[:]
         while len(self.players) < self.size:
 
-            [parent1, parent2] = fitness_weighted_selection(parents)
+            parent1, parent2 = fitness_weighted_selection(parents)
             offspring1, offspring2 = parent1.empty_clone(), parent2.empty_clone()
             offspring1.genome, offspring2.genome = crossover(parent1.genome, parent2.genome, self.current_generation)
             offspring1.genome, offspring2.genome = mutate(offspring1.genome, mutation_rate), mutate(offspring2.genome, mutation_rate)
