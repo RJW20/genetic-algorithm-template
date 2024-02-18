@@ -41,6 +41,4 @@ class Layer:
     def __eq__(self, other: Layer) -> bool:
         """Return True if both Layers have the same size and parameters."""
 
-        if not np.array_equal(self.bias, other.bias): return False      #most of the time we will know by now
-        if not np.array_equal(self.weights, other.weights): return False
-        return True
+        return (np.array_equal(self.bias, other.bias) and np.array_equal(self.weights, other.weights))
