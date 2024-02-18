@@ -19,7 +19,7 @@ def main() -> None:
     match(creation_type):
         case 'new':
             structure = genetic_algorithm_settings['structure']
-            population.new_brains(structure)
+            population.new_genomes(structure)
         case 'load':
             load_folder = genetic_algorithm_settings['load_folder']
             population.load(load_folder)

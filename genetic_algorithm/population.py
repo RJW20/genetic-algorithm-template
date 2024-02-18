@@ -54,7 +54,7 @@ class Population:
             
         if len(self.players) == self.size + 1: self.players.pop()   #adding 2 at a time can cause us to add one too many
 
-    def new_brains(self, structure: tuple[tuple[int,str]]) -> None:
+    def new_genomes(self, structure: tuple[tuple[int,str]]) -> None:
         """Fill the population with newly randomized Genomes of given structure.
         
         Structure must be a tuple of tuples (size, activation).
