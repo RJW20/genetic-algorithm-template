@@ -9,15 +9,9 @@ from activation_functions import sigmoid, relu, softmax, linear, activation_by_n
 class Layer:
     """Layer in a neural network."""
 
-    __slots__ = (
-        "size",
-        "weights",
-        "bias",
-        "activation",
-        "neurons",
-    )
-
     def __init__(self, size: int, activation: Callable[[np.ndarray], np.ndarray]) -> None:
+        self.weights = np.array([[]])
+        self.bias = np.array([])
         self.activation = activation
         self.neurons = np.zeros(size)
 
@@ -50,24 +44,3 @@ class Layer:
         if not np.array_equal(self.bias, other.bias): return False      #most of the time we will know by now
         if not np.array_equal(self.weights, other.weights): return False
         return True
-    
-    def __getstate__(self) -> dict:
-        """Return a dictionary of attributes and their values as (key, value) pairs."""
-
-        d = dict()
-        d['size'] = self.size
-        d['weights'] = self.weights
-        d['bias'] = self.bias
-        d['activation'] = str(self.activation)
-        d['neurons'] = self.neurons
-
-        return d
-    
-    def __setstate__(self, d: dict) -> Layer:
-        """Load the attributes in the dictionary d into self."""
-
-        self.size = d['size']
-        self.weights = d['weights']
-        self.bias = d['bias']
-        self.activation = activation_by_name(d['activation'])
-        self.neurons = d['neurons']
