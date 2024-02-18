@@ -20,18 +20,10 @@ class Population:
     @property
     def average_fitness(self) -> float:
         return (sum(player.fitness for player in self.players) / float(len(self.players)))
-
-    @average_fitness.setter
-    def average_fitness(self, value) -> None:
-        raise Exception('Cannot set average fitness. This is a read-only property.')
     
     @property
     def champ(self) -> BasePlayer:
         return max(self.players, key = lambda player: player.fitness)
-
-    @champ.setter
-    def champ(self, value) -> None:
-        raise Exception('Cannot set the champ. This is a read-only property.')
 
     def cull(self, percentage: float) -> None:
         """Remove all but top percentage of players with highest fitness."""
