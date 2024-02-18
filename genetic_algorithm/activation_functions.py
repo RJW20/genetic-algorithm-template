@@ -7,16 +7,24 @@ sigmoid = lambda X: 1.0 / (1.0 + np.exp(-X))
 
 relu = lambda X: np.maximum(0, X)
 
-def softmax(X: np.array) -> np.array:
+def softmax(X: np.ndarray) -> np.ndarray:
     return np.array([1/sum(np.exp(np.subtract(X, _))) for _ in np.nditer(X)])
 
 linear = lambda X: X
 
-def activation_by_name(name: str) -> Callable[[np.array], np.array]:
+def activation_by_name(name: str) -> Callable[[np.ndarray], np.ndarray]:
     """Return activation function from name."""
 
-    activations = [('sigmoid', sigmoid), ('relu', relu), ('softmax', softmax), ('linear', linear)]
-    func = [activation[1] for activation in activations if activation[0].lower() == name.lower()]
-    assert len(func) == 1, f"Invalid activation function {name}"
+    activations = {
+        'sigmoid': sigmoid,
+        'relu': relu,
+        'softmax': softmax,
+        'linear': linear,
+    }
 
-    return func[0]
+    try:
+        activation = activations[name.lower()]
+    except KeyError:
+        raise Exception(f"Invalid activation function {name}")
+
+    return activation

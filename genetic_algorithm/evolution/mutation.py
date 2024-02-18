@@ -36,8 +36,14 @@ def uniform_mutation(genome: Genome, mutation_rate: float) -> None:
 def mutation_by_name(name: str) -> Callable[[Genome, float], None]:
     """Return mutation function from name."""
 
-    mutations = [('gaussian', gaussian_mutation), ('uniform', uniform_mutation)]
-    func = [mutation[1] for mutation in mutations if mutation[0].lower() == name.lower()]
-    assert len(func) == 1, f"Invalid mutation function {name}"
+    mutations = {
+        'gaussian': gaussian_mutation,
+        'uniform': uniform_mutation,
+    }
+    
+    try:
+        mutation = mutations[name.lower()]
+    except KeyError:
+         raise Exception(f"Invalid mutation function {name}")
 
-    return func[0]
+    return mutation
