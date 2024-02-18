@@ -1,4 +1,5 @@
 import os
+from collections import Sequence
 
 import numpy as np
 
@@ -12,7 +13,7 @@ from evolution.mutation import gaussian_mutation, uniform_mutation, mutation_by_
 class Population:
     """Population of (subclasses of) BasePlayers."""
 
-    def __init__(self, size: int, players: list[BasePlayer], gen: int = 1) -> None:
+    def __init__(self, size: int, players: Sequence[BasePlayer], gen: int = 1) -> None:
         self.size = size
         self.players = players
         self.current_generation = gen
