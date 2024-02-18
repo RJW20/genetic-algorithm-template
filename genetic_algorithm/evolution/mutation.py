@@ -44,6 +44,6 @@ def mutation_by_name(name: Literal['gaussian', 'uniform']) -> Callable[[Genome, 
     try:
         mutation = mutations[name]
     except KeyError:
-         raise TypeError
+         raise TypeError(f"Invalid mutation function{name}")
 
     return mutation
