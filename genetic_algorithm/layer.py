@@ -17,13 +17,13 @@ class Layer:
         "neurons",
     )
 
-    def __init__(self, size: int, activation: Callable[[np.array], np.array]) -> None:
+    def __init__(self, size: int, activation: Callable[[np.ndarray], np.ndarray]) -> None:
         self.size = size
         self.activation = activation
         self.neurons = np.zeros(size)
 
     @classmethod
-    def new(cls, size: int, prev_size: int, activation: Callable[[np.array], np.array]) -> Layer:
+    def new(cls, size: int, prev_size: int, activation: Callable[[np.ndarray], np.ndarray]) -> Layer:
         """Return a newly randomized Layer.
         
         Layer parameters will have values ~U[-1,1].
@@ -35,7 +35,7 @@ class Layer:
         
         return layer
 
-    def propagate(self, prev_neurons: np.array) -> None:
+    def propagate(self, prev_neurons: np.ndarray) -> None:
         """Compute this layer's neurons given the previous."""
 
         deactivated = np.add(np.dot(self.weights, prev_neurons), self.bias)
