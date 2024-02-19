@@ -12,7 +12,7 @@ class Genome:
 
     def __init__(self, birth_gen: int = 1) -> None:
         self.birth_gen = birth_gen
-        self.layers = tuple()
+        self.layers = list()
 
     @classmethod
     def new(cls, birth_gen: int, structure: tuple[tuple[int,str]]) -> Genome:
