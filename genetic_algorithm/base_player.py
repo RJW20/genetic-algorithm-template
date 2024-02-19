@@ -55,6 +55,11 @@ class BasePlayer(ABC):
         """Return True if the player has reached a state where the game is over."""
         pass
 
+    @abstractmethod
+    def start_state(self) -> None:
+        """Get a player in a state to begin simulation."""
+        pass
+
     def __eq__(self, other: BasePlayer) -> bool:
         return self.genome == other.genome
     
