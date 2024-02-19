@@ -19,6 +19,14 @@ class BasePlayer(ABC):
         self._fitness = value
 
     @property
+    def best_score(self) -> int:
+        return self._best_score
+    
+    @best_score.setter
+    def best_score(self, value: int) -> None:
+        self._best_score = value
+
+    @property
     def genome(self) -> Genome:
         return self._genome
 
