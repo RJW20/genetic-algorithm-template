@@ -10,7 +10,7 @@ class Player(BasePlayer):
     """
 
     def __init__(self, **kwargs) -> None:
-        pass
+        super(Player, self).__init__(**kwargs)
 
     def look(self) -> None:
         """Update the attributes used as input to the Genome."""
