@@ -18,6 +18,7 @@ def simulate(player: Player) -> Player:
     Collect stats and then calculate the fitness of the player and assign it.
     """
     stats = dict()
+    simulation_settings #to be used here
 
     while not player.is_dead:
         player.look()
