@@ -38,7 +38,7 @@ class Genome:
 
         self.layers[0].propagate(input)
         for layer_no, layer in enumerate(self.layers[1:]):
-            layer.propagate(self.layers[layer_no-1].neurons)
+            layer.propagate(self.layers[layer_no].neurons)
 
         return self.layers[-1].neurons
 
