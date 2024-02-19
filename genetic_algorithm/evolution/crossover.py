@@ -20,7 +20,7 @@ def one_point_crossover(parent1: Genome, parent2: Genome, gen: int) -> tuple[Gen
 
         weights_mask = np.random.uniform(0, 1, size=l1.weights.shape)
         offspring1.layers[i].weights[weights_mask > crossover_rate] = l2.weights[weights_mask > crossover_rate]
-        offspring2.layers[i].weights[weights_mask > crossover_rate] = l1.weigths[weights_mask > crossover_rate]
+        offspring2.layers[i].weights[weights_mask > crossover_rate] = l1.weights[weights_mask > crossover_rate]
 
         bias_mask = np.random.uniform(0, 1, size=l1.bias.shape)
         offspring1.layers[i].bias[bias_mask > crossover_rate] = l2.bias[bias_mask > crossover_rate]
@@ -43,7 +43,7 @@ def uniform_crossover(parent1: Genome, parent2: Genome, gen: int) -> tuple[Genom
 
         weights_mask = np.random.uniform(0, 1, size=l1.weights.shape)
         offspring1.layers[i].weights[weights_mask > 0.5] = l2.weights[weights_mask > 0.5]
-        offspring2.layers[i].weights[weights_mask > 0.5] = l1.weigths[weights_mask > 0.5]
+        offspring2.layers[i].weights[weights_mask > 0.5] = l1.weights[weights_mask > 0.5]
 
         bias_mask = np.random.uniform(0, 1, size=l1.bias.shape)
         offspring1.layers[i].bias[bias_mask > 0.5] = l2.bias[bias_mask > 0.5]
