@@ -8,8 +8,7 @@ class BasePlayer(ABC):
     """Abstract base class for a Player in a population."""
 
     def __init__(self) -> None:
-        self._fitness = 0
-        self._best_score = 0
+        pass
 
     @property
     def fitness(self) -> float:
