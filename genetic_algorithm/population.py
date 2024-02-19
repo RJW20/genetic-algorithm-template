@@ -61,7 +61,7 @@ class Population:
         """
 
         for player in self.players:
-            player.genome = Genome.new(structure)
+            player.genome = Genome.new(1, structure)
 
     def save(self, folder_name: str) -> None:
         """Save population stats and players' Genomes.
