@@ -2,7 +2,7 @@ from .player import Player
 from settings import simulation_settings
 
 
-def calculate_fitness(**stats: dict) -> float:
+def calculate_fitness(**stats) -> float:
     """Return a value determining how 'good' a player is.
     
     This will be a function of stats.
@@ -17,7 +17,7 @@ def simulate(player: Player) -> Player:
     Run the player in its environment dependent on simulation_settings.
     Collect stats and then calculate the fitness of the player and assign it.
     """
-    stats = dict()
+
     simulation_settings #to be used here
 
     while not player.is_dead:
@@ -27,5 +27,5 @@ def simulate(player: Player) -> Player:
 
         #edit stats after each move
 
-    player.fitness = calculate_fitness(**stats)
+    player.fitness = calculate_fitness()
     return player
