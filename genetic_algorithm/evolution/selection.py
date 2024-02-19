@@ -16,12 +16,12 @@ def fitness_weighted_selection(parents: list[BasePlayer]) -> tuple[BasePlayer, B
     sum_fitness = sum(fitness_table)
 
     if min_fitness < 0:
-        raise Exception("To use fitness_weighted_selection all parents must have a fitness \
-                        greater than or equal to zero. Please edit the calculate_fitness function.")
+        raise Exception("To use fitness_weighted_selection all parents must have a fitness " +
+                        "greater than or equal to zero. Please edit the calculate_fitness function.")
 
     if max_fitness == sum_fitness:
-        raise Exception("To use fitness_weighted_selection at least two parents must have a \
-                        strictly positive fitness. Please edit the calculate_fitness function")
+        raise Exception("To use fitness_weighted_selection at least two parents must have a " + 
+                        "strictly positive fitness. Please edit the calculate_fitness function.")
 
     wheel = sum(parent.fitness for parent in parents)
     probabilities = [parent.fitness/wheel for parent in parents]
