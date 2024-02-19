@@ -30,6 +30,10 @@ class Player(BasePlayer):
         """Return True if the player has reached a state where the game is over."""
         pass
 
+    def start_state(self) -> None:
+        """Get a player in a state to begin simulation."""
+        pass
+
     def __getstate__(self) -> dict:
         """Return a dictionary containing attribute names and their values as (key, value) pairs.
         
