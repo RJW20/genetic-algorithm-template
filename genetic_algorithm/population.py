@@ -58,7 +58,8 @@ class Population:
             parent1, parent2 = fitness_weighted_selection(parents)
             offspring1, offspring2 = parent1.empty_clone(), parent2.empty_clone()
             offspring1.genome, offspring2.genome = crossover(parent1.genome, parent2.genome, self.current_generation)
-            offspring1.genome, offspring2.genome = mutate(offspring1.genome, mutation_rate), mutate(offspring2.genome, mutation_rate)
+            mutate(offspring1.genome, mutation_rate)
+            mutate(offspring2.genome, mutation_rate)
             self.players.extend([offspring1, offspring2])
             
         if len(self.players) == self.size + 1: self.players.pop()   #adding 2 at a time can cause us to add one too many
