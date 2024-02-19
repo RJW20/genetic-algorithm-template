@@ -25,6 +25,15 @@ class Population:
     @property
     def champ(self) -> BasePlayer:
         return max(self.players, key = lambda player: player.fitness)
+    
+    def new_genomes(self, structure: tuple[tuple[int,str]]) -> None:
+        """Fill the population with newly randomized Genomes of given structure.
+        
+        Structure must be a tuple of tuples (size, activation).
+        """
+
+        for player in self.players:
+            player.genome = Genome.new(1, structure)
 
     def cull(self, percentage: float) -> None:
         """Remove all but top percentage of players with highest fitness."""
@@ -53,15 +62,6 @@ class Population:
             self.players.extend([offspring1, offspring2])
             
         if len(self.players) == self.size + 1: self.players.pop()   #adding 2 at a time can cause us to add one too many
-
-    def new_genomes(self, structure: tuple[tuple[int,str]]) -> None:
-        """Fill the population with newly randomized Genomes of given structure.
-        
-        Structure must be a tuple of tuples (size, activation).
-        """
-
-        for player in self.players:
-            player.genome = Genome.new(1, structure)
 
     def save(self, folder_name: str) -> None:
         """Save population stats and players' Genomes.
