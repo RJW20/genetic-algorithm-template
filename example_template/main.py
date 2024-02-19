@@ -39,7 +39,8 @@ def main() -> None:
             population.players = pool.imap_unordered(simulate, population.players, chunksize=1)
 
         #print some stats
-        print(f'\ngeneration: {population.current_generation}, best fitness: {round(population.champ.fitness)}, average fitness: {round(population.average_fitness)}, ', end = '')
+        print(f'\ngeneration: {population.current_generation}, champ\'s best score: {population.champ.best_score}, ' + 
+              f'best fitness: {round(population.champ.fitness)}, average fitness: {round(population.average_fitness)}, ', end = '')
 
         #remove the poorly perfoming players and report the improvements
         population.cull(parent_percentage)
