@@ -4,8 +4,8 @@ import os
 
 import numpy as np
 
-from .layer import Layer
-from .activation_functions import sigmoid, relu, softmax, linear, activation_by_name
+from genetic_algorithm.layer import Layer
+from genetic_algorithm.activation_functions import sigmoid, relu, softmax, linear, activation_by_name
 
 class Genome:
     """Neural network of given structure."""

@@ -3,11 +3,11 @@ from collections.abc import Sequence
 
 import numpy as np
 
-from .base_player import BasePlayer
-from .genome import Genome
-from evolution.selection import fitness_weighted_selection
-from evolution.crossover import one_point_crossover, uniform_crossover, crossover_by_name
-from evolution.mutation import gaussian_mutation, uniform_mutation, mutation_by_name
+from genetic_algorithm.base_player import BasePlayer
+from genetic_algorithm.genome import Genome
+from genetic_algorithm.evolution.selection import fitness_weighted_selection
+from genetic_algorithm.evolution.crossover import one_point_crossover, uniform_crossover, crossover_by_name
+from genetic_algorithm.evolution.mutation import gaussian_mutation, uniform_mutation, mutation_by_name
 
 
 class Population:

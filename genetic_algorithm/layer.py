@@ -3,7 +3,7 @@ from typing import Callable
 
 import numpy as np
 
-from .activation_functions import sigmoid, relu, softmax, linear, activation_by_name
+from genetic_algorithm.activation_functions import sigmoid, relu, softmax, linear, activation_by_name
 
 
 class Layer:

@@ -1,8 +1,6 @@
-from functools import cached_property
-
 import numpy as np
 
-from ..base_player import BasePlayer
+from genetic_algorithm.base_player import BasePlayer
 
 
 def fitness_weighted_selection(parents: list[BasePlayer]) -> tuple[BasePlayer, BasePlayer]:

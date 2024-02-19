@@ -2,7 +2,7 @@ from typing import Callable, Literal
 
 import numpy as np
 
-from ..genome import Genome
+from genetic_algorithm.genome import Genome
 
 
 def gaussian_mutation(genome: Genome, mutation_rate: float) -> None:

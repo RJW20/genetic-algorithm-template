@@ -2,7 +2,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any
 
-from .genome import Genome
+from genetic_algorithm.genome import Genome
 
 class BasePlayer(ABC):
     """Abstract base class for a Player in a population."""
