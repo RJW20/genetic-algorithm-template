@@ -25,6 +25,6 @@ def fitness_weighted_selection(parents: list[BasePlayer]) -> tuple[BasePlayer, B
 
     wheel = sum(parent.fitness for parent in parents)
     probabilities = [parent.fitness/wheel for parent in parents]
-    selection = np.random.Generator.choice(parents, 2, replace=False, p=probabilities, axis=0, shuffle=False)
+    selection = np.random.choice(parents, 2, replace=False, p=probabilities)
 
     return selection[0], selection[1]
