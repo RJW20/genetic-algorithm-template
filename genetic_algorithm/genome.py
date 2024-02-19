@@ -22,7 +22,7 @@ class Genome:
         """
 
         genome = cls(birth_gen)
-        for _, layer_properties in enumerate(structure):
+        for _, layer_properties in enumerate(structure[1:]):
             size = layer_properties[0]
             activation = activation_by_name(layer_properties[1])
             genome.layers.append(Layer.new(size, activation))
