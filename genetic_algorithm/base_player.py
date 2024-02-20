@@ -57,7 +57,7 @@ class BasePlayer(ABC):
 
     @abstractmethod
     def start_state(self) -> None:
-        """Get a player in a state to begin simulation."""
+        """Put player in a state to begin simulation in its environment."""
         pass
 
     def __eq__(self, other: BasePlayer) -> bool:

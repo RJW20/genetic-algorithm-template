@@ -31,7 +31,7 @@ class Player(BasePlayer):
         pass
 
     def start_state(self) -> None:
-        """Get a player in a state to begin simulation."""
+        """Put player in a state to begin simulation in its environment."""
         pass
 
     def __getstate__(self) -> dict:
