@@ -47,7 +47,7 @@ def main() -> None:
         print(f'average parent fitness: {round(population.average_fitness)}\n')
 
         #save the progress
-        population.champ.genome.save(file_name=population.current_generation, folder_name='champs')
+        population.champ.genome.save(file_name=f'{population.current_generation}_{population.champ.best_score}', folder_name='champs')
         population.save('latest population')
 
         #repopulate in preparation to repeat
