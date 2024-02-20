@@ -18,6 +18,8 @@ def simulate(player: Player) -> Player:
     Collect stats and then calculate the fitness of the player and assign it.
     """
 
+    player.start_state()
+
     simulation_settings #to be used here
 
     while not player.is_dead:
