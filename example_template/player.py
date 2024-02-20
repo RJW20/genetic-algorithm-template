@@ -10,8 +10,9 @@ class Player(BasePlayer):
     """
 
     def __init__(self, **kwargs) -> None:
-        self._fitness = 0
-        self._best_score = 0
+        self._fitness: int = 0
+        self._best_score: int = 0
+        self.score: int
 
     def look(self) -> None:
         """Update the attributes used as input to the Genome."""
@@ -32,7 +33,7 @@ class Player(BasePlayer):
 
     def start_state(self) -> None:
         """Put player in a state to begin simulation in its environment."""
-        pass
+        self.score = 0
 
     def __getstate__(self) -> dict:
         """Return a dictionary containing attribute names and their values as (key, value) pairs.
