@@ -10,9 +10,9 @@ class Player(BasePlayer):
     """
 
     def __init__(self, **kwargs) -> None:
+        self._score: int = 0
         self._fitness: int = 0
         self._best_score: int = 0
-        self.score: int
 
     def look(self) -> None:
         """Update the attributes used as input to the Genome."""
