@@ -11,7 +11,7 @@ from settings import genetic_algorithm_settings
 population_size = genetic_algorithm_settings['population_size']
 creation_type = genetic_algorithm_settings['creation_type']
 load_folder = genetic_algorithm_settings['load_folder']
-save_folder = genetic_algorithm_settings['save_folder']
+parents_folder = genetic_algorithm_settings['parents_folder']
 total_generations = genetic_algorithm_settings['total_generations']
 history_folder = genetic_algorithm_settings['history_folder']
 history_type = genetic_algorithm_settings['history_type']
