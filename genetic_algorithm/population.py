@@ -180,10 +180,10 @@ class Population:
 
             #load the Genome and its corresponding fitness
             genome, fitness = Genome.load(file_name, folder_name)
-            genome.fitness = fitness
 
             #add the Genome to a (unique) player
             self.players[id].genome = genome
+            self.players[id].fitness = fitness
             id += 1
 
         #remove the rest of the players

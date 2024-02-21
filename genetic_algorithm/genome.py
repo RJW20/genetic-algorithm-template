@@ -55,7 +55,7 @@ class Genome:
 
         return deepcopy(self)
 
-    def save(self, file_name: str, folder_name: str, fitness: float = .0) -> None:
+    def save(self, file_name: str, folder_name: str, fitness: float) -> None:
         """Save neural network parameters to .npz."""
 
         #check folder exists, create if it doesn't
