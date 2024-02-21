@@ -1,5 +1,6 @@
 import os
 from collections.abc import Sequence
+from typing import Literal
 
 import numpy as np
 
@@ -69,10 +70,51 @@ class Population:
             
         if len(self.players) == self.size + 1: self.players.pop()   #adding 2 at a time can cause us to add one too many
 
-    def save(self, folder_name: str) -> None:
-        """Save population stats and players' Genomes.
+    def save_history(self, folder_name: str, type: Literal['none', 'champ', 'absolute', 'percentage', 'entire'], value: float = 0) -> None:
+        """Save current population's best players into folder folder_name.
         
-        Designed to be done after a cull so that a new population can be repopulated from the save and continue evolution.
+        Type and value are used to determine how many players to save.
+        Should not be used after a cull.
+        """
+
+        match(type):
+            case 'none':
+                return
+            case 'champ':
+                count = 1
+            case 'absolute':
+                count = value
+                folder_name = f'{folder_name}/{self.current_generation}'
+            case 'percentage':
+                count = int(self.size * value)
+                folder_name = f'{folder_name}/{self.current_generation}'
+            case 'entire':
+                count = self.size
+                folder_name = f'{folder_name}/{self.current_generation}'
+            case _:
+                raise TypeError(f'Invalid history type {type}')
+
+        self.rank()
+        self.save(folder_name, count, True)
+
+    def save_parents(self, folder_name: str) -> None:
+        """Save generation and the Genomes of remaining players.
+        
+        Must be used after a cull.
+        """
+
+        self.save(folder_name, len(self.players))
+
+        stats = dict()
+        stats['current_generation'] = self.current_generation
+        np.savez(f'{folder_name}/stats', **stats)
+
+    def save(self, folder_name: str, count: int, include_score: bool = False) -> None:
+        """Save the first count players into the folder with path folder_name.
+
+        If the folder already exists it will be cleared.
+        If count is bigger than the total number of players then the entire population will be saved.
+        File names will be {rank}.npz or {rank}_{score}.npz.
         """
 
         #check folder exists, create if it doesn't
@@ -83,15 +125,12 @@ class Population:
         for file in os.listdir(folder_name):
             os.remove(f'{folder_name}/{file}')
 
-        #create a dictionary of stats
-        stats = dict()
-        stats['current_generation'] = self.current_generation
-
         #save the Genomes and record their fitness for repopulation
-        for id, player in enumerate(self.players):
-            player.genome.save(id, folder_name, player.fitness)
-
-        np.savez(f'{folder_name}/stats', **stats)
+        count = min(count, len(self.players))
+        for id, player in enumerate(self.players[:count]):
+            file_name = str(id)
+            if include_score: file_name = f'{file_name}_{player.score}'
+            player.genome.save(file_name, folder_name, player.fitness)
 
     def load(self, folder_name: str) -> None:
         """Load Genomes saved in the given folder into the population's players.
@@ -104,9 +143,12 @@ class Population:
         if not os.path.exists(folder_name):
             raise Exception("Prescribed parent folder doesn't exist")
         
-        #load the stats
-        stats = np.load(f'{folder_name}/stats')
-        self.current_generation = stats['current_generation']
+        #load the generation
+        try:
+            stats = np.load(f'{folder_name}/stats')
+            self.current_generation = stats['current_generation']
+        except OSError:
+            self.current_generation = 1
 
         #load the Genomes and assign their fitness
         id = 0
