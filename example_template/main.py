@@ -35,6 +35,7 @@ def main() -> None:
             population.new_genomes(structure)
         case 'load':
             population.load(load_folder)
+            population.repopulate(crossover_type, mutation_type, mutation_rate)
 
     #evolve
     while population.current_generation < total_generations:
