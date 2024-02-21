@@ -165,9 +165,10 @@ class Population:
         
         #load the generation
         try:
-            stats = np.load(f'{folder_name}/stats')
+            stats = np.load(f'{folder_name}/stats.npz')
             self.current_generation = stats['current_generation']
         except OSError:
+            print('Unable to load the generation number, population will be assigned generation 1.')
             self.current_generation = 1
 
         #load the Genomes and assign their fitness
