@@ -66,7 +66,7 @@ class Genome:
         genome_dict = dict()
         genome_dict['birth_gen'] = self.birth_gen
         genome_dict['fitness'] = fitness
-        genome_dict['save_structure'] = np.array([(layer.size, str(layer.activation)) for layer in self.layers], dtype='int,S8')
+        genome_dict['save_structure'] = np.array([(layer.size, layer.activation.__name__) for layer in self.layers], dtype='int,S8')
         for i, layer in enumerate(self.layers):
             genome_dict[f'{i}_weights'] = layer.weights
             genome_dict[f'{i}_bias'] = layer.bias
