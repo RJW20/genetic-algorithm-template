@@ -83,22 +83,26 @@ class Population:
             case 'champ':
                 count = 1
                 file_name_format = 'gs'
+                overwrite = False
             case 'absolute':
                 count = value
                 folder_name = f'{folder_name}/{self.current_generation}'
                 file_name_format = 'rs'
+                overwrite = True
             case 'percentage':
                 count = int(self.size * value)
                 folder_name = f'{folder_name}/{self.current_generation}'
                 file_name_format = 'rs'
+                overwrite = True
             case 'entire':
                 count = self.size
                 folder_name = f'{folder_name}/{self.current_generation}'
                 file_name_format = 'rs'
+                overwrite = True
             case _:
                 raise TypeError(f'Invalid history type {type}')
 
-        self.save(folder_name, file_name_format, count)
+        self.save(count, folder_name, file_name_format, overwrite)
 
     def save_parents(self, folder_name: str) -> None:
         """Save generation and the Genomes of remaining players.
@@ -106,18 +110,18 @@ class Population:
         Must be used after a cull.
         """
 
-        self.save(folder_name, 'r', len(self.players))
+        self.save(len(self.players), folder_name, 'r')
 
         stats = dict()
         stats['current_generation'] = self.current_generation
         np.savez(f'{folder_name}/stats', **stats)
 
-    def save(self, folder_name: str, file_name_format: Literal['r', 'gs', 'rs'], count: int) -> None:
+    def save(self, count: int, folder_name: str, file_name_format: Literal['r', 'gs', 'rs'], overwrite = True) -> None:
         """Save the top count players into the folder with path folder_name.
 
-        If the folder already exists it will be cleared.
+        If the folder already exists, it will be cleared if overwrite is True.
         If count is bigger than the total number of players then the entire population will be saved.
-        File names will be {rank}.npz, {current_gen}_{score}.npz or {rank}_{score}.npz.
+        File names will be {rank}.npz, {current_gen}_{best_score}.npz or {rank}_{best_score}.npz.
         """
 
         #move the best players to the top
@@ -128,8 +132,9 @@ class Population:
             os.makedirs(folder_name)
 
         #clear the folder
-        for file in os.listdir(folder_name):
-            os.remove(f'{folder_name}/{file}')
+        if overwrite:
+            for file in os.listdir(folder_name):
+                os.remove(f'{folder_name}/{file}')
 
         #save the Genomes and record their fitness for repopulation
         count = min(count, len(self.players))
@@ -139,9 +144,9 @@ class Population:
                 case 'r':
                     file_name = f'{rank}'
                 case 'gs':
-                    file_name = f'{self.current_generation}_{player.score}'
+                    file_name = f'{self.current_generation}_{player.best_score}'
                 case 'rs':
-                    file_name = f'{rank}_{player.score}'
+                    file_name = f'{rank}_{player.best_score}'
                 case _:
                     raise TypeError(f'Invalid file name format {file_name_format}.')
                 
