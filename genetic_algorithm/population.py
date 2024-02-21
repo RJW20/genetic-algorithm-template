@@ -35,10 +35,15 @@ class Population:
         for player in self.players:
             player.genome = Genome.new(1, structure)
 
+    def rank(self) -> None:
+        """Order players by fitness."""
+
+        self.players.sort(key = lambda player: player.fitness, reverse=True)
+
     def cull(self, percentage: float) -> None:
         """Remove all but top percentage of players with highest fitness."""
 
-        self.players.sort(key = lambda player: player.fitness, reverse=True)
+        self.rank()
         num_left = max(int(self.size * percentage), 2)  #need at least 2 left to be able to repopulate 
         self.players = self.players[:num_left]
 
