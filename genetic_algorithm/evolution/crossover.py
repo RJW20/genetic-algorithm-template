@@ -63,6 +63,6 @@ def crossover_by_name(name: Literal['one-point', 'uniform']) -> Callable[[Genome
     try:
         crossover = crossovers[name]
     except KeyError:
-        raise TypeError(f"Invalid crossover function {name}")
+        raise TypeError(f"Invalid crossover function {name}.")
 
     return crossover

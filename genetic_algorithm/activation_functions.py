@@ -28,6 +28,6 @@ def activation_by_name(name: Literal['sigmoid', 'relu', 'softmax', 'linear']) ->
     try:
         activation = activations[name]
     except KeyError:
-        raise TypeError(f"Invalid activation function {name}")
+        raise TypeError(f"Invalid activation function {name}.")
 
     return activation
