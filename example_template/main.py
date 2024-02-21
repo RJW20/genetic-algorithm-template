@@ -38,7 +38,7 @@ def main() -> None:
             population.repopulate(crossover_type, mutation_type, mutation_rate)
 
     #evolve
-    while population.current_generation < total_generations:
+    while population.current_generation <= total_generations:
 
         #run the players with multiprocessing
         with Pool() as pool:
