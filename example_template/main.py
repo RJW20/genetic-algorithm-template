@@ -56,7 +56,7 @@ def main() -> None:
         print(f'average parent fitness: {round(population.average_fitness)}\n')
 
         #save the parents
-        population.save_parents(save_folder)
+        population.save_parents(parents_folder)
 
         #repopulate in preparation to repeat
         population.repopulate(crossover_type, mutation_type, mutation_rate)
