@@ -161,14 +161,13 @@ class Population:
 
         #check folder exists
         if not os.path.exists(folder_name):
-            raise Exception("Prescribed parent folder doesn't exist")
+            raise Exception("Prescribed load-from folder doesn't exist")
         
-        #load the generation
+        #load the generation if applicable
         try:
             stats = np.load(f'{folder_name}/stats.npz')
             self.current_generation = stats['current_generation']
         except OSError:
-            print('Unable to load the generation number, loaded population will be assigned generation 1.')
             self.current_generation = 1
 
         #load the Genomes and assign their fitness
