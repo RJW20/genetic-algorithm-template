@@ -172,7 +172,7 @@ class Population:
 
         #load the Genomes and assign their fitness
         id = 0
-        for file_name in sorted(os.listdir(folder_name), key=lambda name: int(name.split('_')[0])):
+        for file_name in os.listdir(folder_name).sort():
 
             if file_name == 'stats.npz': continue   #already opened
 
