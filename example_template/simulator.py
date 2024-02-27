@@ -29,5 +29,6 @@ def simulate(player: Player) -> Player:
 
         #edit stats after each move
 
+    player.best_score = player.score
     player.fitness = calculate_fitness()
     return player
