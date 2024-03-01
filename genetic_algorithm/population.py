@@ -1,4 +1,5 @@
 import os
+import re
 from collections.abc import Sequence
 from typing import Literal
 
@@ -116,7 +117,7 @@ class Population:
         stats['current_generation'] = self.current_generation
         np.savez(f'{folder_name}/stats', **stats)
 
-    def save(self, count: int, folder_name: str, file_name_format: Literal['r', 'gs', 'rs'], overwrite = True) -> None:
+    def save(self, count: int, folder_name: str, file_name_format: Literal['r', 'gs', 'rs'], overwrite: bool = True) -> None:
         """Save the top count players into the folder with path folder_name.
 
         If the folder already exists, it will be cleared if overwrite is True.
@@ -170,11 +171,16 @@ class Population:
         except OSError:
             self.current_generation = 1
 
+        #prepare the list of files
+        file_names = os.listdir(folder_name)
+        try:
+            file_names.remove('stats.npz')
+        finally:
+            file_names.sort(key = lambda file_name: int(re.search(r"^\d+", file_name).group()))
+
         #load the Genomes and assign their fitness
         id = 0
-        for file_name in sorted(os.listdir(folder_name)):
-
-            if file_name == 'stats.npz': continue   #already opened
+        for file_name in file_names:
 
             if id > self.size: break    #run out of players to load genomes into
 
