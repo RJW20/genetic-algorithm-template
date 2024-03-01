@@ -175,6 +175,8 @@ class Population:
         file_names = os.listdir(folder_name)
         try:
             file_names.remove('stats.npz')
+        except Exception:
+            pass
         finally:
             file_names.sort(key = lambda file_name: int(re.search(r"^\d+", file_name).group()))
 
