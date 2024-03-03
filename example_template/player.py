@@ -1,4 +1,5 @@
 from typing import Any
+from copy import deepcopy
 
 from genetic_algorithm import BasePlayer
 
@@ -34,7 +35,3 @@ class Player(BasePlayer):
     def start_state(self) -> None:
         """Put player in a state to begin simulation in its environment."""
         self.score = 0
-
-    def empty_clone(self) -> BasePlayer:
-        """Return a new instance of self's class without a genome."""
-        pass

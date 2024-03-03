@@ -1,6 +1,7 @@
 from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any
+from copy import deepcopy
 
 from genetic_algorithm.genome import Genome
 
@@ -71,10 +72,12 @@ class BasePlayer(ABC):
     def __eq__(self, other: BasePlayer) -> bool:
         return self.genome == other.genome
 
-    @abstractmethod
     def empty_clone(self) -> BasePlayer:
         """Return a new instance of self's class without a genome."""
-        pass
+        
+        clone = deepcopy(self)
+        clone.fitness = 0
+        clone.best_score = 0
+        clone.genome = None
 
-
-
+        return clone
