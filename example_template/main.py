@@ -3,7 +3,7 @@ from multiprocessing import Pool
 from genetic_algorithm import Population
 from .player import Player
 from .simulator import simulate
-from settings import player_args
+from .settings import player_args
 
 
 #bind settings to variables
