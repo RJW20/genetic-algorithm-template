@@ -29,7 +29,7 @@ Either fill out all methods described or let the player class also extend the cl
 ### Simulator
 This is where the player will be simulated in its environment. All rules of the game the player is a part of must be present and you should collect stats on how the player performs to feed into the `calculate_fitness` function.
 
-#### Fitness
+### Fitness
 This is a value determining how good a player is. In the simplest case this can just be a player's score.
 
 ### Configuring the Settings
@@ -38,10 +38,27 @@ This is a value determining how good a player is. In the simplest case this can 
 A dictionary of the arguments you need to start a new instance of your player class.
 
 #### `genetic_algorithm_settings`
-The settings dictating how the genetic algorithm creates and evolves the population of players:
-- 
+The settings dictating how the genetic algorithm creates and evolves the population of players.
+1. Population Properties:
+  - `population_size`: 
+  - `creation_type`:
+  - `load_folder`:
+  - `parents_folder`:
+  - `total_generations`:
+2. History Properties:
+  - `history_folder`:
+  - `history_type`:
+  - `history_value`:
+3. Genome Properties:
+  - `structure`:
+4. Evolution Properties:
+  - `parent_percentage`:
+  - `crossover_type`:
+  - `mutation_type`:
+  - `mutation_rate`: 
 
 #### `simulation_settings`
+Any constants or values that every simulation of the game needs to set up the environment for the player in the `simulate` function.
 
 ## Running the Algorithm
-
+Run the function `main` in `main.py` from the template.
