@@ -1,6 +1,6 @@
 # Genetic Algorithm Template
 
-Template of implementation of the genetic algorithm on neural networks, written in python.
+Template of implementation of the genetic algorithm on neural networks (NNs), written in python.
 
 ## Basic Requirements
 1. [Python](https://www.python.org/downloads/).
@@ -40,22 +40,22 @@ A dictionary of the arguments you need to start a new instance of your player cl
 #### `genetic_algorithm_settings`
 The settings dictating how the genetic algorithm creates and evolves the population of players.
 1. Population Properties:
-  - `population_size`: 
-  - `creation_type`:
-  - `load_folder`:
-  - `parents_folder`:
-  - `total_generations`:
+  - `population_size`: How many players to simulate in every generation.
+  - `creation_type`: `new` to create a newly randomized population or `load` to load a previous save of parents and repopulate from there.
+  - `load_folder`: Folder where the parents to load from are saved (if applicable).
+  - `parents_folder`: Folder to save parents of each generation to (will be overwritten each time).
+  - `total_generations`: Number of iterations of the algorithm.
 2. History Properties:
-  - `history_folder`:
-  - `history_type`:
-  - `history_value`:
+  - `history_folder`: Folder to save the best performing NN's of each generation.
+  - `history_type`: Describes what will be saved each generation.
+  - `history_value`: Works with `history_type`.
 3. Genome Properties:
-  - `structure`:
+  - `structure`: The structure of the genome's NN. This must be of type tuple[tuple[int, str], ...] where the int value is how many nodes to have in the layer and string value is the activation function for that layer (options are 'sigmoid', 'relu', 'softmax', 'linear'). Note the node count for the first layer must be the same as the number of inputs that are being fed into the genome and for the last layer must be the same as the number of possible moves a player has.
 4. Evolution Properties:
-  - `parent_percentage`:
-  - `crossover_type`:
-  - `mutation_type`:
-  - `mutation_rate`: 
+  - `parent_percentage`: (Decimal) percentage of parents to create the next generation from.
+  - `crossover_type`: Describes how offspring will be generated from parents.
+  - `mutation_type`: Desribes how offspring will mutate.
+  - `mutation_rate`: (Decimal) percentage of how many genes to mutate in a genome.
 
 #### `simulation_settings`
 Any constants or values that every simulation of the game needs to set up the environment for the player in the `simulate` function.
