@@ -25,7 +25,7 @@ class Player(BasePlayer):
         """Feed the input into the Genome and turn the output into a valid move."""
 
         genome_input = np.array([])     #some function of the vision found in self.look()
-        self.genome.propagate(genome_input)
+        genome_output = self.genome.propagate(genome_input)
 
     def move(self, move: Any) -> None:
         """Advance to the state achieved by carrying out move."""
