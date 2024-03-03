@@ -7,7 +7,7 @@ from .settings import player_args
 
 
 #bind settings to variables
-from settings import genetic_algorithm_settings
+from example_template.settings import genetic_algorithm_settings
 population_size = genetic_algorithm_settings['population_size']
 creation_type = genetic_algorithm_settings['creation_type']
 load_folder = genetic_algorithm_settings['load_folder']
