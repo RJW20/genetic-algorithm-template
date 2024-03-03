@@ -1,6 +1,8 @@
 from typing import Any
 from copy import deepcopy
 
+import numpy as np
+
 from genetic_algorithm import BasePlayer
 
 
@@ -21,7 +23,9 @@ class Player(BasePlayer):
 
     def think(self) -> Any:
         """Feed the input into the Genome and turn the output into a valid move."""
-        pass
+
+        genome_input = np.array([])     #some function of the vision found in self.look()
+        self.genome.propagate(genome_input)
 
     def move(self, move: Any) -> None:
         """Advance to the state achieved by carrying out move."""
