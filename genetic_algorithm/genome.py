@@ -30,7 +30,7 @@ class Genome:
 
         return genome
 
-    def propagate(self, input: np.array) -> np.array:
+    def propagate(self, input: np.ndarray) -> np.ndarray:
         """Return the final layer neurons obtained from feeding forward the given input.
         
         The input must already be in order and normalized.
