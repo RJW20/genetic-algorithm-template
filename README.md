@@ -64,5 +64,5 @@ Any constants or values that every simulation of the game needs to set up the en
 Run the function `main` in `main.py` from the template.
 
 ## Examples
-- [Snake](https://github.com/RJW20/snake_ai_genetic_algorithm)
+- [Snake](https://github.com/RJW20/snake_ai_genetic_algorithm_v2)
 - [Flappy Bird](https://github.com/RJW20/flappy_bird_ai_genetic_algorithm)
