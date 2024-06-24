@@ -10,16 +10,10 @@ Template of implementation of the genetic algorithm on neural networks (NNs), wr
    - It is possible to define when the player is doing well (see [Fitness](#Fitness)).
 
 ## Getting Started
-If using [Poetry](https://python-poetry.org/docs/):
-- Download the entire repo and place it in folder `libs/`.
-- Under `[tool.poetry.dependencies]` in your `pyproject.toml` file add `genetic_algorithm = { path = "libs/genetic_algorithm_template/", develop = false }`.
-- Add [Numpy](https://numpy.org/) with `poetry add numpy`.
+- If using [Poetry](https://python-poetry.org/docs/) simply use the command `poetry add git+https://github.com/RJW20/genetic-algorithm-template.git`.
+- If not using Poetry download just the `genetic_algorithm` folder and place it in the root of your current project directory, and ensure you have the latest version of [NumPy](https://numpy.org/) installed.
 
-If not using Poetry:
-- Download just the `genetic_algorithm` folder and place it in the root of your current project directory.
-- Make sure you have the latest version of [NumPy](https://numpy.org/) installed.
-
-In both cases, also copy all files from the `example_template` and place them in a `src/` folder or whatever folder it is your going to be working in.
+In both cases, also download/copy all contents of `example_template` and place them in a `src/` folder or whatever directory it is you're going to be working in.
 
 ## Using the Template
 
